@@ -1,0 +1,36 @@
+"use client";
+import { Nunito } from "next/font/google";
+import { createTheme } from "@mui/material/styles";
+
+const nunito = Nunito({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const theme = createTheme({
+  typography: {
+    fontFamily: nunito.style.fontFamily,
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          color: "black",
+          backgroundColor: "#fff",
+          boxShadow: "none",
+          borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: "black",
+        },
+      },
+    },
+  },
+});
+
+export default theme;
