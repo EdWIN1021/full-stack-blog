@@ -9,14 +9,17 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+
+const pages = ["Write", "Notifications"];
+const settings = ["Profile", "Logout"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -81,19 +84,23 @@ function Header() {
             </Link>
           </Box>
 
-          <Box className="hidden md:flex flex-1 justify-end">
-            {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu}>
-                {page}
-              </Button>
-            ))}
+          <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3">
+            <Button
+              size="large"
+              startIcon={<EditCalendarOutlinedIcon fontSize="inherit" />}
+            >
+              Write
+            </Button>
+
+            <IconButton size="large">
+              <NotificationsNoneOutlinedIcon fontSize="inherit" />
+            </IconButton>
           </Box>
 
           <Box>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu}>
-                {/* Capital User Name */}
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton size="large" onClick={handleOpenUserMenu}>
+                <AccountCircleOutlinedIcon fontSize="inherit" />
               </IconButton>
             </Tooltip>
             <Menu

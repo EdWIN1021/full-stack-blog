@@ -26,7 +26,9 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: "black",
+          color: "grey",
+          textTransform: "capitalize",
+          fontWeight: "700",
         },
       },
     },
