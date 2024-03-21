@@ -45,7 +45,8 @@ function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box>
+          {/* Hamburger */}
+          <Box className="flex md:hidden">
             <IconButton onClick={handleOpenNavMenu}>
               <MenuIcon />
             </IconButton>
@@ -65,20 +66,22 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
 
-          <Link
-            className="bg-black px-3 py-1 text-xl mr-2 font-bold text-white whitespace-nowrap text-center"
-            href={"#"}
-          >
-            BLOG
-          </Link>
+          <Box className="flex-1 text-center md:text-left">
+            <Link
+              className="bg-black px-3 py-1 text-xl mr-2 font-bold text-white whitespace-nowrap text-center "
+              href={"#"}
+            >
+              BLOG
+            </Link>
+          </Box>
 
-          <Box className="hidden md:flex flex-1 justify-end my-2">
+          <Box className="hidden md:flex flex-1 justify-end">
             {pages.map((page) => (
               <Button key={page} onClick={handleCloseNavMenu}>
                 {page}
@@ -89,6 +92,7 @@ function Header() {
           <Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu}>
+                {/* Capital User Name */}
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
