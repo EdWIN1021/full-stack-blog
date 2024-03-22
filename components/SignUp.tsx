@@ -30,57 +30,59 @@ const SignUp: React.FC<SignUpProps> = ({
           <CloseIcon />
         </IconButton>
 
-        <p className="text-3xl my-8 font-medium">Join Blog.</p>
+        <form>
+          <p className="text-3xl my-8 font-medium">Join Blog.</p>
 
-        <TextField className="w-full mb-8" label="Email" variant="standard" />
+          <TextField className="w-full mb-8" label="Email" variant="standard" />
 
-        <TextField
-          className="w-full mb-8"
-          label="Password"
-          variant="standard"
-        />
+          <TextField
+            className="w-full mb-8"
+            label="Password"
+            variant="standard"
+          />
 
-        <TextField
-          className="w-full mb-8"
-          label="Confirm Password"
-          variant="standard"
-        />
+          <TextField
+            className="w-full mb-8"
+            label="Confirm Password"
+            variant="standard"
+          />
 
-        <div className="flex flex-col gap-3 w-full mt-5 mb-10">
-          <ButtonBase className="text-white bg-black rounded-full py-3">
-            <div className="flex gap-3 items-center min-w-[150px]">
-              <EmailOutlinedIcon />
-              <span>Sign up with Email</span>
-            </div>
-          </ButtonBase>
+          <div className="flex flex-col gap-3 w-full mt-5 mb-10">
+            <ButtonBase className="text-white bg-black rounded-full py-3">
+              <div className="flex gap-3 items-center min-w-[150px]">
+                <EmailOutlinedIcon />
+                <span>Sign up with Email</span>
+              </div>
+            </ButtonBase>
 
-          <ButtonBase className="border border-black border-solid rounded-full py-3">
-            <div className="flex gap-3 items-center min-w-[150px]">
-              <Image src="/google.svg" width={20} height={20} alt="google" />
-              <span>Sign up with Google</span>
-            </div>
-          </ButtonBase>
+            <ButtonBase className="border border-black border-solid rounded-full py-3">
+              <div className="flex gap-3 items-center min-w-[150px]">
+                <Image src="/google.svg" width={20} height={20} alt="google" />
+                <span>Sign up with Google</span>
+              </div>
+            </ButtonBase>
 
-          <ButtonBase className="border border-black border-solid rounded-full py-3">
-            <div className="flex gap-3 items-center min-w-[150px]">
-              <Image src="/github.svg" width={20} height={20} alt="github" />
-              <span> Sign up with Github</span>
-            </div>
-          </ButtonBase>
-        </div>
+            <ButtonBase className="border border-black border-solid rounded-full py-3">
+              <div className="flex gap-3 items-center min-w-[150px]">
+                <Image src="/github.svg" width={20} height={20} alt="github" />
+                <span> Sign up with Github</span>
+              </div>
+            </ButtonBase>
+          </div>
 
-        <p>
-          Already have an account?{" "}
-          <span
-            className="text-[rgb(26,137,23)] font-bold cursor-pointer"
-            onClick={() => {
-              toggleSignUp((open) => !open);
-              toggleSignIn((open) => !open);
-            }}
-          >
-            Sign in
-          </span>
-        </p>
+          <p>
+            Already have an account?{" "}
+            <span
+              className="text-[rgb(26,137,23)] font-bold cursor-pointer"
+              onClick={() => {
+                toggleSignUp((open) => !open);
+                toggleSignIn((open) => !open);
+              }}
+            >
+              Sign in
+            </span>
+          </p>
+        </form>
       </Box>
     </Modal>
   );
