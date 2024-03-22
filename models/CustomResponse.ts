@@ -1,4 +1,4 @@
-class Message {
+abstract class CustomResponse {
   message: string;
   statusCode: number;
 
@@ -8,4 +8,4 @@ class Message {
   }
 }
 
-export default Message;
+export default CustomResponse;

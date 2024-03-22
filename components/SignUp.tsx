@@ -24,6 +24,17 @@ const SignUp: React.FC<SignUpProps> = ({
   toggleSignUp,
   toggleSignIn,
 }) => {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch("/api/signup", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    console.log(data);
+  }
   return (
     <Modal open={isSignUp} onClose={() => toggleSignUp((open) => !open)}>
       <div className="bg-white center p-10 min-w-[400px] min-h-[500px] flex flex-col">
@@ -34,20 +45,34 @@ const SignUp: React.FC<SignUpProps> = ({
           <CloseIcon />
         </IconButton>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <Typography variant="h4" fontWeight={500} textAlign={"center"}>
             Join Blog.
           </Typography>
 
           <Stack spacing={3} mt={6}>
-            <TextField label="Email" variant="standard" color="secondary" />
+            <TextField
+              label="Email"
+              variant="standard"
+              color="secondary"
+              type="email"
+              name="email"
+            />
 
-            <TextField label="Password" variant="standard" color="secondary" />
+            <TextField
+              label="Password"
+              variant="standard"
+              color="secondary"
+              type="password"
+              name="password"
+            />
 
             <TextField
               label="Confirm Password"
               variant="standard"
               color="secondary"
+              type="confirmPassword"
+              name="confirmPassword"
             />
           </Stack>
 
@@ -56,6 +81,7 @@ const SignUp: React.FC<SignUpProps> = ({
               variant="contained"
               size="large"
               startIcon={<EmailOutlinedIcon />}
+              type="submit"
             >
               Sign up with Email
             </Button>
