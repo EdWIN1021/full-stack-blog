@@ -1,21 +1,11 @@
 "use client";
-import { Nunito } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
-
-const nunito = Nunito({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const theme = createTheme({
   palette: {
     primary: {
       main: "rgb(26,137,23)",
     },
-  },
-  typography: {
-    fontFamily: nunito.style.fontFamily,
   },
   components: {
     MuiAppBar: {
@@ -31,9 +21,7 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          // color: "grey",
           textTransform: "capitalize",
-          // fontWeight: "700",
         },
       },
     },

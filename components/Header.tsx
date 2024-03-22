@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
-import { InputBase } from "@mui/material";
+import { ButtonBase, InputBase } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import SignInOrUp from "./SignUp";
@@ -94,14 +94,11 @@ function Header() {
             </Box>
 
             {/* links */}
-            <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3">
-              <Button
-                className="text-[grey]"
-                size="large"
-                startIcon={<EditCalendarOutlinedIcon fontSize="inherit" />}
-              >
-                Write
-              </Button>
+            <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3 items-center">
+              <ButtonBase className="flex gap-2 items-center py-1 px-2">
+                <EditCalendarOutlinedIcon className="text-[grey]" />
+                <span className="text-base text-[grey]">Write</span>
+              </ButtonBase>
 
               <IconButton size="large">
                 <NotificationsNoneOutlinedIcon fontSize="inherit" />
@@ -160,8 +157,16 @@ function Header() {
         </Container>
       </AppBar>
 
-      <SignIn isSignIn={isSignIn} toggleSignIn={toggleSignIn} />
-      <SignUp isSignUp={isSignUp} toggleSignUp={toggleSignUp} />
+      <SignIn
+        isSignIn={isSignIn}
+        toggleSignIn={toggleSignIn}
+        toggleSignUp={toggleSignUp}
+      />
+      <SignUp
+        isSignUp={isSignUp}
+        toggleSignUp={toggleSignUp}
+        toggleSignIn={toggleSignIn}
+      />
     </>
   );
 }
