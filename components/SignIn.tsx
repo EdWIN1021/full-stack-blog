@@ -3,7 +3,14 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { ButtonBase, IconButton, TextField } from "@mui/material";
+import {
+  Button,
+  ButtonBase,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -20,7 +27,7 @@ const SignIn: React.FC<SignInProps> = ({
 }) => {
   return (
     <Modal open={isSignIn} onClose={() => toggleSignIn((open) => !open)}>
-      <Box className="bg-white center p-10 min-w-[400px] min-h-[500px] flex flex-col items-center">
+      <div className="bg-white center p-10 min-w-[400px] min-h-[500px] flex flex-col ">
         <IconButton
           className="self-end"
           onClick={() => toggleSignIn((open) => !open)}
@@ -28,52 +35,62 @@ const SignIn: React.FC<SignInProps> = ({
           <CloseIcon />
         </IconButton>
 
-        <p className="text-3xl my-8 font-medium">Welcome back.</p>
+        <form>
+          <Typography variant="h4" fontWeight={500} textAlign={"center"}>
+            Welcome back.
+          </Typography>
 
-        <TextField className="w-full mb-8" label="Email" variant="standard" />
+          <Stack spacing={3} mt={6}>
+            <TextField label="Email" variant="standard" color="secondary" />
 
-        <TextField
-          className="w-full mb-8"
-          label="Password"
-          variant="standard"
-        />
+            <TextField label="Password" variant="standard" color="secondary" />
+          </Stack>
 
-        <div className="flex flex-col gap-3 w-full mt-5 mb-10">
-          <ButtonBase className="text-white bg-black rounded-full py-3">
-            <div className="flex gap-3 items-center min-w-[150px]">
-              <EmailOutlinedIcon />
-              <span>Sign in with Email</span>
-            </div>
-          </ButtonBase>
+          <Stack spacing={2} mt={8} mb={6}>
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<EmailOutlinedIcon />}
+            >
+              Sign in with Email
+            </Button>
 
-          <ButtonBase className="border border-black border-solid rounded-full py-3">
-            <div className="flex gap-3 items-center min-w-[150px]">
-              <Image src="/google.svg" width={20} height={20} alt="google" />
-              <span>Sign in with Google</span>
-            </div>
-          </ButtonBase>
+            <Button
+              variant="outlined"
+              size="large"
+              startIcon={
+                <Image src="/google.svg" width={20} height={20} alt="google" />
+              }
+              fullWidth
+            >
+              Sign in with Google
+            </Button>
 
-          <ButtonBase className="border border-black border-solid rounded-full py-3">
-            <div className="flex gap-3 items-center min-w-[150px]">
-              <Image src="/github.svg" width={20} height={20} alt="github" />
-              <span> Sign in with Github</span>
-            </div>
-          </ButtonBase>
-        </div>
+            <Button
+              variant="outlined"
+              size="large"
+              startIcon={
+                <Image src="/github.svg" width={20} height={20} alt="github" />
+              }
+            >
+              Sign in with Github
+            </Button>
+          </Stack>
 
-        <p>
-          No account?{" "}
-          <span
-            className="text-[rgb(26,137,23)] font-bold cursor-pointer"
-            onClick={() => {
-              toggleSignUp((open) => !open);
-              toggleSignIn((open) => !open);
-            }}
-          >
-            Create one
-          </span>
-        </p>
-      </Box>
+          <p className="text-center">
+            No account?{" "}
+            <span
+              className="text-[rgb(26,137,23)] font-bold cursor-pointer"
+              onClick={() => {
+                toggleSignUp((open) => !open);
+                toggleSignIn((open) => !open);
+              }}
+            >
+              Create one
+            </span>
+          </p>
+        </form>
+      </div>
     </Modal>
   );
 };
