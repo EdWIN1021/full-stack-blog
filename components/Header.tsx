@@ -96,6 +96,7 @@ function Header() {
             {/* links */}
             <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3">
               <Button
+                className="text-[grey]"
                 size="large"
                 startIcon={<EditCalendarOutlinedIcon fontSize="inherit" />}
               >

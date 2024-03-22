@@ -9,6 +9,11 @@ const nunito = Nunito({
 });
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: "rgb(26,137,23)",
+    },
+  },
   typography: {
     fontFamily: nunito.style.fontFamily,
   },
@@ -26,9 +31,9 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: "grey",
+          // color: "grey",
           textTransform: "capitalize",
-          fontWeight: "700",
+          // fontWeight: "700",
         },
       },
     },
