@@ -16,12 +16,13 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import { InputBase } from "@mui/material";
-
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import SignInOrUp from "./SignUp";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 const pages = ["Write", "Notifications"];
-const settings = ["Profile", "Logout"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -31,111 +32,136 @@ function Header() {
     null
   );
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const [isSignIn, toggleSignIn] = React.useState(false);
+  const [isSignUp, toggleSignUp] = React.useState(false);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) =>
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) =>
     setAnchorElUser(event.currentTarget);
-  };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const handleCloseNavMenu = () => setAnchorElNav(null);
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const handleCloseUserMenu = () => setAnchorElUser(null);
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* Hamburger */}
-          <Box className="flex md:hidden">
-            <IconButton onClick={handleOpenNavMenu}>
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          {/* Logo */}
-          <div className="flex flex-1 justify-center md:flex-none">
-            <Link
-              className="bg-black px-6 py-2 text-xl mr-2 font-bold text-white whitespace-nowrap text-center"
-              href={"#"}
-            >
-              BLOG
-            </Link>
-          </div>
-
-          {/* Search Bar */}
-          <Box className="rounded-full px-3 py-2 bg-[#F9F9F9] md:flex items-center gap-2 ml-4 hidden">
-            <SearchOutlinedIcon className="text-[grey]" />
-            <InputBase className="" type="text" placeholder="Search" />
-          </Box>
-
-          <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3">
-            <Button
-              size="large"
-              startIcon={<EditCalendarOutlinedIcon fontSize="inherit" />}
-            >
-              Write
-            </Button>
-
-            <IconButton size="large">
-              <NotificationsNoneOutlinedIcon fontSize="inherit" />
-            </IconButton>
-          </Box>
-          <Box>
-            <Tooltip title="Open settings">
-              <IconButton size="large" onClick={handleOpenUserMenu}>
-                <AccountCircleOutlinedIcon fontSize="inherit" />
+    <>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            {/* Hamburger */}
+            <Box className="flex md:hidden">
+              <IconButton onClick={handleOpenNavMenu}>
+                <MenuIcon />
               </IconButton>
-            </Tooltip>
-            <Menu
-              className="mt-[45px]"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
+              <Menu
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography>{page}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+
+            {/* Logo */}
+            <div className="flex flex-1 justify-center md:flex-none">
+              <Link
+                className="bg-black px-6 py-2 text-xl mr-2 font-bold text-white whitespace-nowrap text-center"
+                href={"#"}
+              >
+                BLOG
+              </Link>
+            </div>
+
+            {/* Search Bar */}
+            <Box className="rounded-full px-3 py-2 bg-[#F9F9F9] md:flex items-center gap-2 ml-4 hidden">
+              <SearchOutlinedIcon className="text-[grey]" />
+              <InputBase className="" type="text" placeholder="Search" />
+            </Box>
+
+            {/* links */}
+            <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3">
+              <Button
+                size="large"
+                startIcon={<EditCalendarOutlinedIcon fontSize="inherit" />}
+              >
+                Write
+              </Button>
+
+              <IconButton size="large">
+                <NotificationsNoneOutlinedIcon fontSize="inherit" />
+              </IconButton>
+            </Box>
+
+            {/* settings */}
+            <Box>
+              <Tooltip title="Open settings">
+                <IconButton size="large" onClick={handleOpenUserMenu}>
+                  <AccountCircleOutlinedIcon fontSize="inherit" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                className="mt-[45px]"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {/* Auth Setting
+              {["Profile", "Logout"].map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography>{setting}</Typography>
                 </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              ))} */}
+
+                <MenuItem
+                  onClick={() => {
+                    toggleSignIn((open) => !open);
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <Typography>Signin</Typography>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={() => {
+                    toggleSignUp((open) => !open);
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <Typography>Signup</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <SignIn isSignIn={isSignIn} toggleSignIn={toggleSignIn} />
+      <SignUp isSignUp={isSignUp} toggleSignUp={toggleSignUp} />
+    </>
   );
 }
 export default Header;
