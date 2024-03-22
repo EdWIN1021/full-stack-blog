@@ -15,8 +15,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
+import { InputBase } from "@mui/material";
 
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const pages = ["Write", "Notifications"];
 const settings = ["Profile", "Logout"];
@@ -75,13 +77,20 @@ function Header() {
             </Menu>
           </Box>
 
-          <Box className="flex-1 text-center md:text-left">
+          {/* Logo */}
+          <div className="flex flex-1 justify-center md:flex-none">
             <Link
-              className="bg-black px-3 py-1 text-xl mr-2 font-bold text-white whitespace-nowrap text-center "
+              className="bg-black px-6 py-2 text-xl mr-2 font-bold text-white whitespace-nowrap text-center"
               href={"#"}
             >
               BLOG
             </Link>
+          </div>
+
+          {/* Search Bar */}
+          <Box className="rounded-full px-3 py-2 bg-[#F9F9F9] md:flex items-center gap-2 ml-4 hidden">
+            <SearchOutlinedIcon className="text-[grey]" />
+            <InputBase className="" type="text" placeholder="Search" />
           </Box>
 
           <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3">
@@ -96,7 +105,6 @@ function Header() {
               <NotificationsNoneOutlinedIcon fontSize="inherit" />
             </IconButton>
           </Box>
-
           <Box>
             <Tooltip title="Open settings">
               <IconButton size="large" onClick={handleOpenUserMenu}>
