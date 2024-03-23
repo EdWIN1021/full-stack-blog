@@ -3,14 +3,14 @@ import ErrorMessage from "@/constants/errorMessage";
 import HttpStatusCode from "@/constants/httpStatusCode";
 import ResponseCode from "@/constants/responseCode";
 
-class DuplicateUserError extends CustomError {
+class InvalidEmailError extends CustomError {
   constructor() {
     super(
-      ErrorMessage.DuplicateUser,
-      HttpStatusCode.Conflict,
-      ResponseCode.DuplicateUser
+      ErrorMessage.InvalidEmail,
+      HttpStatusCode.BadRequest,
+      ResponseCode.InvalidEmail
     );
   }
 }
 
-export default DuplicateUserError;
+export default InvalidEmailError;

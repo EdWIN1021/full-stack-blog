@@ -3,14 +3,14 @@ import ErrorMessage from "@/constants/errorMessage";
 import HttpStatusCode from "@/constants/httpStatusCode";
 import ResponseCode from "@/constants/responseCode";
 
-class DuplicateUserError extends CustomError {
+class PasswordMismatchError extends CustomError {
   constructor() {
     super(
-      ErrorMessage.DuplicateUser,
-      HttpStatusCode.Conflict,
-      ResponseCode.DuplicateUser
+      ErrorMessage.PasswordMismatch,
+      HttpStatusCode.BadRequest,
+      ResponseCode.PasswordMismatch
     );
   }
 }
 
-export default DuplicateUserError;
+export default PasswordMismatchError;
