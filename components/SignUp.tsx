@@ -71,7 +71,7 @@ const SignUp: React.FC<SignUpProps> = ({
               label="Confirm Password"
               variant="standard"
               color="secondary"
-              type="confirmPassword"
+              type="password"
               name="confirmPassword"
             />
           </Stack>

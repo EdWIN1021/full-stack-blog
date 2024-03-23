@@ -1,10 +1,8 @@
 abstract class CustomResponse {
   message: string;
-  statusCode: number;
 
-  constructor(message: string, statusCode: number) {
+  constructor(message: string) {
     this.message = message;
-    this.statusCode = statusCode;
   }
 }
 
