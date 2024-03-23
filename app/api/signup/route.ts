@@ -2,37 +2,52 @@ import SuccessRegistrationResponse from "@/models/responses/SuccessRegistrationR
 import { NextResponse } from "next/server";
 import HttpStatusCode from "@/constants/httpStatusCode";
 import dbConnect from "@/lib/dbConnect";
-import { isEmail, equals } from "validator";
+import { isEmail, equals, isStrongPassword } from "validator";
 
-import User from "@/models/User";
+import { User } from "@/models/User";
 import DuplicateUserError from "@/models/errors/DuplicateUserError";
 import InvalidEmailError from "@/models/errors/InvalidEmailError";
 import PasswordMismatchError from "@/models/errors/PasswordMismatchError";
+import InvalidPasswordError from "@/models/errors/InvalidPasswordError";
 
 export async function POST(request: Request) {
   await dbConnect();
 
   const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
-  const confirmPassword = formData.get("confirmPassword");
+  const email = String(formData.get("email"));
+  const password = String(formData.get("password"));
+  const confirmPassword = String(formData.get("confirmPassword"));
 
   try {
-    if (!isEmail(String(email))) throw new InvalidEmailError();
-
-    if (!equals(String(password), String(confirmPassword)))
-      throw new PasswordMismatchError();
+    if (!isEmail(email)) throw new InvalidEmailError();
+    if (!isStrongPassword(password)) throw new InvalidPasswordError();
+    if (!equals(password, confirmPassword)) throw new PasswordMismatchError();
 
     // check if the email is taken
     const user = await User.findOne({ email });
     if (user) throw new DuplicateUserError();
 
+    // hash password
+    const hashedPassword = await User.hashPassword(String(password));
+
     //create a new user
+    const newUser = new User({ email, hashedPassword });
+    await newUser.save();
+
+    return NextResponse.json(
+      {
+        data: new SuccessRegistrationResponse(newUser),
+      },
+      {
+        status: HttpStatusCode.Created,
+      }
+    );
   } catch (err) {
     if (
       err instanceof DuplicateUserError ||
       err instanceof InvalidEmailError ||
-      err instanceof PasswordMismatchError
+      err instanceof PasswordMismatchError ||
+      err instanceof InvalidPasswordError
     ) {
       return NextResponse.json(
         {
@@ -49,18 +64,4 @@ export async function POST(request: Request) {
       );
     }
   }
-
-  // create a new user
-  // const newUser = new User({ email, hashed_password: password });
-  // await newUser.save();
-  // const data = new SuccessRegistrationResponse(newUser);
-
-  return NextResponse.json(
-    {
-      data: null,
-    },
-    {
-      status: HttpStatusCode.Created,
-    }
-  );
 }
