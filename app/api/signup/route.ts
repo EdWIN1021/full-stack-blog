@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     // hash password
     const hashedPassword = await User.hashPassword(String(password));
 
-    //create a new user
+    // create a new user
     const newUser = new User({ email, hashedPassword });
     await newUser.save();
 
@@ -54,7 +54,6 @@ export async function POST(request: Request) {
           error: {
             status: err.status,
             message: err.message,
-            code: err.code,
             statusCode: err.statusCode,
           },
         },

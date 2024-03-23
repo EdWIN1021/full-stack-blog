@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 // Define the interface for User
 export interface IUser extends Document {
   email: string;
-  hashedPassword: string;
+  hashedPassword?: string;
 }
 
 // Define the interface for User model with the static method
@@ -13,10 +13,34 @@ interface IUserModel extends Model<IUser> {
 }
 
 // Define the schema for User
-const userSchema = new Schema<IUser>({
-  email: { type: String, required: true, unique: true },
-  hashedPassword: { type: String, required: true }, // assuming hashed_password is required
-});
+const userSchema = new Schema<IUser>(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    hashedPassword: {
+      type: String,
+      required: true,
+      selected: false,
+    },
+  },
+  {
+    timestamps: true, // Add createAt and updateAt
+    versionKey: false, // __v field will not be included
+
+    toJSON: {
+      transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.hashedPassword;
+      },
+    },
+    // toJSON: { virtuals: true },
+    // toObject: { virtuals: true },
+  }
+);
 
 // Define static methods for the User model
 userSchema.statics.hashPassword = async function (
