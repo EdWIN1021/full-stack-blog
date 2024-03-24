@@ -31,10 +31,6 @@ const SignIn: React.FC<SignInProps> = ({
   const [showToast, toggleToast] = React.useState(false);
   const [toastType, setToastType] = React.useState<AlertColor>("warning");
 
-  React.useEffect(() => {
-    console.log("runs");
-  }, []);
-
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {

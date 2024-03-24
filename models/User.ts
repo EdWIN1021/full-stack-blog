@@ -5,6 +5,8 @@ import bcrypt from "bcrypt";
 export interface IUser extends Document {
   email: string;
   hashedPassword?: string;
+  name: string;
+  image: string;
 }
 
 // Define the interface for User model with the static method
@@ -24,6 +26,12 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       selected: false,
+    },
+    image: {
+      type: String,
+    },
+    name: {
+      type: String,
     },
   },
   {
