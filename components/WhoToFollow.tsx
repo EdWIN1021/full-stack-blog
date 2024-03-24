@@ -13,7 +13,7 @@ const WhoToFollow = () => {
             <Avatar
               sizes="20px"
               alt={"E"}
-              src={"/static/images/avatar/2.jpg"}
+              src={""}
               sx={{ width: 36, height: 36 }}
             />
 
@@ -33,7 +33,7 @@ const WhoToFollow = () => {
             <Avatar
               sizes="20px"
               alt={"E"}
-              src={"/static/images/avatar/2.jpg"}
+              src={""}
               sx={{ width: 36, height: 36 }}
             />
 
@@ -53,7 +53,7 @@ const WhoToFollow = () => {
             <Avatar
               sizes="20px"
               alt={"E"}
-              src={"/static/images/avatar/2.jpg"}
+              src={""}
               sx={{ width: 36, height: 36 }}
             />
 

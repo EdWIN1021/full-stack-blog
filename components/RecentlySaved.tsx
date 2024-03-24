@@ -12,7 +12,7 @@ const RecentlySaved = () => {
             <Avatar
               sizes="20px"
               alt={"E"}
-              src={"/static/images/avatar/2.jpg"}
+              src={""}
               sx={{ width: 24, height: 24 }}
             />
             <span>Edwin Shi</span>
@@ -29,7 +29,7 @@ const RecentlySaved = () => {
             <Avatar
               sizes="20px"
               alt={"E"}
-              src={"/static/images/avatar/2.jpg"}
+              src={""}
               sx={{ width: 24, height: 24 }}
             />
             <span>Edwin Shi</span>
@@ -46,7 +46,7 @@ const RecentlySaved = () => {
             <Avatar
               sizes="20px"
               alt={"E"}
-              src={"/static/images/avatar/2.jpg"}
+              src={""}
               sx={{ width: 24, height: 24 }}
             />
             <span>Edwin Shi</span>
