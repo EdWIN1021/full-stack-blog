@@ -119,7 +119,7 @@ const SignIn: React.FC<SignInProps> = ({
                     alt="google"
                   />
                 }
-                fullWidth
+                onClick={() => signIn("google")}
               >
                 Sign in with Google
               </Button>
@@ -135,6 +135,7 @@ const SignIn: React.FC<SignInProps> = ({
                     alt="github"
                   />
                 }
+                onClick={() => signIn("github")}
               >
                 Sign in with Github
               </Button>

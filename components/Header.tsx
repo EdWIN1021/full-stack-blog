@@ -47,6 +47,8 @@ function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
+  console.log(session);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
