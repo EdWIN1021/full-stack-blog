@@ -109,11 +109,12 @@ function Header() {
               </Link>
             </div>
 
-            {/* Search Bar */}
-            <Box className="rounded-full px-3 py-2 bg-[#F9F9F9] md:flex items-center gap-2 ml-4 hidden">
-              <SearchOutlinedIcon className="text-[grey]" />
-              <InputBase className="" type="text" placeholder="Search" />
-            </Box>
+            {pathname === "/" && (
+              <Box className="rounded-full px-3 py-2 bg-[#F9F9F9] md:flex items-center gap-2 ml-4 hidden">
+                <SearchOutlinedIcon className="text-[grey]" />
+                <InputBase className="" type="text" placeholder="Search" />
+              </Box>
+            )}
 
             {/* links */}
             <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3 items-center">

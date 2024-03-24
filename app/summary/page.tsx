@@ -1,5 +1,5 @@
 import Topics from "@/components/Topics";
-import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Button, Divider, Grid, Stack, Typography } from "@mui/material";
 
 const page = () => {
   return (
@@ -10,6 +10,7 @@ const page = () => {
             Story Preview
           </Typography>
 
+          {/* replace image when upload  */}
           <div className="flex justify-center items-center bg-[#FAFAFA] min-h-[200px] text-[rgba(0,0,0,0.54)] text-center px-20">
             Include a high-quality image in your story to make it more inviting
             to readers.
