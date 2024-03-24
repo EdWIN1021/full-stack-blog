@@ -31,6 +31,10 @@ const SignIn: React.FC<SignInProps> = ({
   const [showToast, toggleToast] = React.useState(false);
   const [toastType, setToastType] = React.useState<AlertColor>("warning");
 
+  React.useEffect(() => {
+    console.log("runs");
+  }, []);
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
@@ -42,14 +46,11 @@ const SignIn: React.FC<SignInProps> = ({
       const response = await signIn("credentials", {
         email,
         password,
-        redirect: false,
       });
 
       if (!response?.ok) {
         throw new Error(response!.error || "Invalid credentials");
       }
-
-      // window.location.href = "/";
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMessage(err.message);

@@ -1,31 +1,47 @@
 "use client";
 
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
+//next auth
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+
+// ui
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Tooltip,
+  MenuItem,
+  ButtonBase,
+  InputBase,
+} from "@mui/material";
+
+// icons
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import EditCalendarOutlinedIcon from "@mui/icons-material/EditCalendarOutlined";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import Link from "next/link";
-import { ButtonBase, InputBase } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { useSession } from "next-auth/react";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+
+const SignIn = dynamic(() => import("./SignIn"), {
+  ssr: false,
+});
+
+const SignUp = dynamic(() => import("./SignUp"), {
+  ssr: false,
+});
 
 const pages = ["Write", "Notifications"];
 
 function Header() {
   const { data: session } = useSession();
-  console.log(session);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -129,41 +145,60 @@ function Header() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {/* Auth Setting
-              {["Profile", "Logout"].map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography>{setting}</Typography>
-                </MenuItem>
-              ))} */}
-
-                <MenuItem
-                  onClick={() => {
-                    toggleSignIn((open) => !open);
-                    handleCloseUserMenu();
-                  }}
-                >
-                  <Typography>Signin</Typography>
-                </MenuItem>
-
-                <MenuItem
-                  onClick={() => {
-                    toggleSignUp((open) => !open);
-                    handleCloseUserMenu();
-                  }}
-                >
-                  <Typography>Signup</Typography>
-                </MenuItem>
+                {session?.user ? (
+                  <div>
+                    <MenuItem
+                      onClick={() => {
+                        toggleSignIn((open) => !open);
+                        handleCloseUserMenu();
+                      }}
+                    >
+                      <Typography>Profile</Typography>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        signOut();
+                        toggleSignUp((open) => !open);
+                        handleCloseUserMenu();
+                      }}
+                    >
+                      <Typography>Logout</Typography>
+                    </MenuItem>
+                  </div>
+                ) : (
+                  <div>
+                    <MenuItem
+                      onClick={() => {
+                        toggleSignIn((open) => !open);
+                        handleCloseUserMenu();
+                      }}
+                    >
+                      <Typography>Signin</Typography>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        toggleSignUp((open) => !open);
+                        handleCloseUserMenu();
+                      }}
+                    >
+                      <Typography>Signup</Typography>
+                    </MenuItem>
+                  </div>
+                )}
               </Menu>
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
 
-      <SignIn
-        isSignIn={isSignIn}
-        toggleSignIn={toggleSignIn}
-        toggleSignUp={toggleSignUp}
-      />
+      {isSignIn && (
+        <SignIn
+          isSignIn={isSignIn}
+          toggleSignIn={toggleSignIn}
+          toggleSignUp={toggleSignUp}
+        />
+      )}
+
       <SignUp
         isSignUp={isSignUp}
         toggleSignUp={toggleSignUp}
