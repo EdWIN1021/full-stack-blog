@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { usePathname, useRouter } from "next/navigation";
 
 //next auth
 import { useSession } from "next-auth/react";
@@ -21,6 +22,7 @@ import {
   MenuItem,
   ButtonBase,
   InputBase,
+  Button,
 } from "@mui/material";
 
 // icons
@@ -42,6 +44,8 @@ const pages = ["Write", "Notifications"];
 
 function Header() {
   const { data: session } = useSession();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -99,7 +103,7 @@ function Header() {
             <div className="flex flex-1 justify-center md:flex-none">
               <Link
                 className="bg-black px-6 py-2 text-xl mr-2 font-bold text-white whitespace-nowrap text-center"
-                href={"#"}
+                href={"/"}
               >
                 BLOG
               </Link>
@@ -113,10 +117,24 @@ function Header() {
 
             {/* links */}
             <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3 items-center">
-              <ButtonBase className="flex gap-2 items-center py-1 px-2">
-                <EditCalendarOutlinedIcon className="text-[grey]" />
-                <span className="text-base text-[grey]">Write</span>
-              </ButtonBase>
+              {pathname === "/write" ? (
+                <Button
+                  size="small"
+                  color="secondary"
+                  variant="contained"
+                  onClick={() => router.push("/summary")}
+                >
+                  Publish
+                </Button>
+              ) : (
+                <ButtonBase
+                  className="flex gap-2 items-center py-1 px-2"
+                  onClick={() => router.push("/write")}
+                >
+                  <EditCalendarOutlinedIcon className="text-[grey]" />
+                  <span className="text-base text-[grey]">Write</span>
+                </ButtonBase>
+              )}
 
               <IconButton size="large">
                 <NotificationsNoneOutlinedIcon fontSize="inherit" />
@@ -149,7 +167,6 @@ function Header() {
                   <div>
                     <MenuItem
                       onClick={() => {
-                        toggleSignIn((open) => !open);
                         handleCloseUserMenu();
                       }}
                     >
@@ -158,7 +175,6 @@ function Header() {
                     <MenuItem
                       onClick={() => {
                         signOut();
-                        toggleSignUp((open) => !open);
                         handleCloseUserMenu();
                       }}
                     >

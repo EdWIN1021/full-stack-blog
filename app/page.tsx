@@ -1,5 +1,4 @@
 import Post from "@/components/Post";
-import { Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 export default function Home() {
