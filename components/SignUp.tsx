@@ -60,7 +60,7 @@ const SignUp: React.FC<SignUpProps> = ({
         throw new Error(authorizeResponse!.error || "Invalid credentials");
       }
 
-      // todo : navigate
+      window.location.href = "/";
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMessage(err.message);

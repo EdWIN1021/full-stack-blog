@@ -13,9 +13,10 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-
 import { signIn } from "next-auth/react";
 import Toast from "./Toast";
+import { useRouter } from "next/navigation";
+
 interface SignInProps {
   isSignIn: boolean;
   toggleSignIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,6 +31,7 @@ const SignIn: React.FC<SignInProps> = ({
   const [message, setMessage] = React.useState("");
   const [showToast, toggleToast] = React.useState(false);
   const [toastType, setToastType] = React.useState<AlertColor>("warning");
+  const router = useRouter();
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,7 +51,7 @@ const SignIn: React.FC<SignInProps> = ({
         throw new Error(response!.error || "Invalid credentials");
       }
 
-      // todo : navigate
+      window.location.href = "/";
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMessage(err.message);

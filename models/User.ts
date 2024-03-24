@@ -49,10 +49,8 @@ userSchema.statics.hashPassword = async function (
   return await bcrypt.hash(password, 10);
 };
 
-
-
 // Export the model if it exists, otherwise create and export it
-export const User: Model<IUser> & IUserModel = model<IUser, IUserModel>(
-  "User",
-  userSchema
-);
+
+export const User =
+  (models.User as Model<IUser> & IUserModel) ||
+  model<IUser, IUserModel>("User", userSchema);

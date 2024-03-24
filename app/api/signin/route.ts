@@ -4,10 +4,7 @@ import dbConnect from "@/lib/dbConnect";
 import { isEmail, isStrongPassword } from "validator";
 import bcrypt from "bcrypt";
 import { User } from "@/models/User";
-import DuplicateUserError from "@/models/errors/DuplicateUserError";
 import InvalidEmailError from "@/models/errors/InvalidEmailError";
-import PasswordMismatchError from "@/models/errors/PasswordMismatchError";
-import InvalidPasswordError from "@/models/errors/InvalidPasswordError";
 import SuccessSignInResponse from "@/models/responses/SuccessSignInResponse";
 import UserNotFoundError from "@/models/errors/UserNotFoundError";
 import UnauthorizedError from "@/models/errors/UnauthorizedError";
@@ -18,7 +15,6 @@ export async function POST(request: Request) {
   const { email, password } = await request.json();
   try {
     if (!isEmail(email)) throw new InvalidEmailError();
-    if (!isStrongPassword(password)) throw new InvalidPasswordError();
 
     // find user by email
     const user = await User.findOne({ email });
@@ -38,10 +34,9 @@ export async function POST(request: Request) {
     );
   } catch (err) {
     if (
-      err instanceof DuplicateUserError ||
       err instanceof InvalidEmailError ||
-      err instanceof PasswordMismatchError ||
-      err instanceof InvalidPasswordError
+      err instanceof UserNotFoundError ||
+      err instanceof UnauthorizedError
     ) {
       return NextResponse.json(
         {
@@ -55,6 +50,8 @@ export async function POST(request: Request) {
           status: err.statusCode,
         }
       );
+    } else {
+      console.error(err);
     }
   }
 }
