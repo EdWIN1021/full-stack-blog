@@ -24,7 +24,6 @@ const userSchema = new Schema<IUser>(
     },
     hashedPassword: {
       type: String,
-      required: true,
       selected: false,
     },
     image: {

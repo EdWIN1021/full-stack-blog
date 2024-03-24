@@ -2,6 +2,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
+import { createUser, getUser } from "@/utils/user";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -35,11 +36,7 @@ export const authOptions: NextAuthOptions = {
             throw new Error(error.message);
           }
           const { data } = await response.json();
-          if (data.user) {
-            return data.user;
-          } else {
-            return null;
-          }
+          return data.user;
         } catch (err) {
           throw err;
         }
@@ -48,8 +45,27 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
+    async signIn({ user, account }) {
+      if (
+        !(account?.provider === "google" || account?.provider === "github") ||
+        !user
+      ) {
+        return true;
+      }
+
+      try {
+        const existingUser = await getUser(user.email!);
+        if (!existingUser) {
+          await createUser(user.email!, user.name!, user.image!);
+        }
+      } catch (err) {
+        console.log(err);
+        return false;
+      }
+
+      return true;
+    },
     async session({ session, token, user }) {
-      console.log(session);
       return session;
     },
   },
