@@ -16,10 +16,10 @@ const page = () => {
             to readers.
           </div>
 
-          <p className="text-xl font-semibold">a</p>
+          <p className="text-xl font-semibold">Write a preview Title</p>
           <Divider />
 
-          <p>a</p>
+          <p>Write a preview subtitle...</p>
           <Divider />
 
           <p className="text-[rgba(0,0,0,0.54)] ">

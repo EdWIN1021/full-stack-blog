@@ -21,7 +21,6 @@ export default function Home() {
           <p>Staff Picks</p>
           some stuff
         </div>
-
         <div className="mb-20">
           <p className="mb-6">Recommended topics</p>
           <div className="flex gap-3 flex-wrap">
@@ -39,9 +38,11 @@ export default function Home() {
             <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Java</span>
           </div>
         </div>
-
         <div>
           <p className="mb-6">Who to follow</p>
+        </div>
+        <div>
+          <p className="mb-6">Recently saved</p>
         </div>
       </Grid>
     </Grid>

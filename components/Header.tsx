@@ -118,28 +118,32 @@ function Header() {
 
             {/* links */}
             <Box className="hidden md:flex flex-1 justify-end mr-3 space-x-3 items-center">
-              {pathname === "/write" ? (
-                <Button
-                  size="small"
-                  color="secondary"
-                  variant="contained"
-                  onClick={() => router.push("/summary")}
-                >
-                  Publish
-                </Button>
-              ) : (
-                <ButtonBase
-                  className="flex gap-2 items-center py-1 px-2"
-                  onClick={() => router.push("/write")}
-                >
-                  <EditCalendarOutlinedIcon className="text-[grey]" />
-                  <span className="text-base text-[grey]">Write</span>
-                </ButtonBase>
-              )}
+              {session?.user && (
+                <>
+                  {pathname === "/write" ? (
+                    <Button
+                      size="small"
+                      color="secondary"
+                      variant="contained"
+                      onClick={() => router.push("/summary")}
+                    >
+                      Publish
+                    </Button>
+                  ) : (
+                    <ButtonBase
+                      className="flex gap-2 items-center py-1 px-2"
+                      onClick={() => router.push("/write")}
+                    >
+                      <EditCalendarOutlinedIcon className="text-[grey]" />
+                      <span className="text-base text-[grey]">Write</span>
+                    </ButtonBase>
+                  )}
 
-              <IconButton size="large">
-                <NotificationsNoneOutlinedIcon fontSize="inherit" />
-              </IconButton>
+                  <IconButton size="large">
+                    <NotificationsNoneOutlinedIcon fontSize="inherit" />
+                  </IconButton>
+                </>
+              )}
             </Box>
 
             {/* settings */}
