@@ -23,6 +23,7 @@ import {
   ButtonBase,
   InputBase,
   Button,
+  Avatar,
 } from "@mui/material";
 
 // icons
@@ -150,7 +151,7 @@ function Header() {
             <Box>
               <Tooltip title="Open settings">
                 <IconButton size="large" onClick={handleOpenUserMenu}>
-                  <AccountCircleOutlinedIcon fontSize="inherit" />
+                  <Avatar alt={session?.user.name} src={session?.user.image} />
                 </IconButton>
               </Tooltip>
               <Menu
