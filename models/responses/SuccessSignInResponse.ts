@@ -3,13 +3,13 @@ import { IUser } from "../User";
 import HttpStatusCode from "@/constants/httpStatusCode";
 import SuccessMessage from "@/constants/successMessage";
 
-class SuccessRegistrationResponse extends CustomResponse {
+class SuccessSignInResponse extends CustomResponse {
   user: IUser;
 
   constructor(user: IUser) {
-    super(SuccessMessage.SignupSuccessMessage, HttpStatusCode.Created);
+    super(SuccessMessage.SigninSuccessMessage, HttpStatusCode.Ok);
     this.user = user;
   }
 }
 
-export default SuccessRegistrationResponse;
+export default SuccessSignInResponse;
