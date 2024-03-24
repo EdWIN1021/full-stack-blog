@@ -46,11 +46,13 @@ const SignIn: React.FC<SignInProps> = ({
       const response = await signIn("credentials", {
         email,
         password,
+        redirect: false,
       });
 
       if (!response?.ok) {
         throw new Error(response!.error || "Invalid credentials");
       }
+      location.reload();
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMessage(err.message);
