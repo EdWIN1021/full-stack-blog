@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import Header from "@/components/Header";
+import AuthProvider from "@/providers/AuthProvider";
 
 import { Nunito } from "next/font/google";
 
@@ -26,12 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <AppRouterCacheProvider options={{ key: "css" }}>
-          <ThemeProvider theme={theme}>
-            <Header />
-            {children}
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <AuthProvider>
+          <AppRouterCacheProvider options={{ key: "css" }}>
+            <ThemeProvider theme={theme}>
+              <Header />
+              {children}
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </AuthProvider>
       </body>
     </html>
   );

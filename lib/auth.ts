@@ -29,24 +29,25 @@ export const authOptions: NextAuthOptions = {
             const { error } = await response.json();
             throw new Error(error.message);
           }
-
-          const data = await response.json();
-
-          return data;
+          const { data } = await response.json();
+          if (data.user) {
+            return data.user;
+          } else {
+            return null;
+          }
         } catch (err) {
           throw err;
         }
       },
     }),
   ],
-  pages: {
-    signIn: "https://www.google.com",
+
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user.id = token.sub;
+      return session;
+    },
   },
-  // callbacks: {
-  //   async session({ session, token, user }) {
-  //     return session;
-  //   },
-  // },
 
   secret: process.env.NEXTAUTH_SECRET,
 };

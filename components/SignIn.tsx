@@ -15,7 +15,6 @@ import Image from "next/image";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { signIn } from "next-auth/react";
 import Toast from "./Toast";
-import { useRouter } from "next/navigation";
 
 interface SignInProps {
   isSignIn: boolean;
@@ -31,7 +30,6 @@ const SignIn: React.FC<SignInProps> = ({
   const [message, setMessage] = React.useState("");
   const [showToast, toggleToast] = React.useState(false);
   const [toastType, setToastType] = React.useState<AlertColor>("warning");
-  const router = useRouter();
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -51,7 +49,7 @@ const SignIn: React.FC<SignInProps> = ({
         throw new Error(response!.error || "Invalid credentials");
       }
 
-      window.location.href = "/";
+      // window.location.href = "/";
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMessage(err.message);

@@ -53,14 +53,11 @@ const SignUp: React.FC<SignUpProps> = ({
       const authorizeResponse = await signIn("credentials", {
         email,
         password,
-        redirect: false,
       });
 
       if (!authorizeResponse?.ok) {
         throw new Error(authorizeResponse!.error || "Invalid credentials");
       }
-
-      window.location.href = "/";
     } catch (err: unknown) {
       if (err instanceof Error) {
         setMessage(err.message);
