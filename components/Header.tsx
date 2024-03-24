@@ -151,7 +151,10 @@ function Header() {
             <Box>
               <Tooltip title="Open settings">
                 <IconButton size="large" onClick={handleOpenUserMenu}>
-                  <Avatar alt={session?.user.name} src={session?.user.image} />
+                  <Avatar
+                    alt={session?.user.name}
+                    src={session?.user.image || "/static/images/avatar/2.jpg"}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu

@@ -1,5 +1,9 @@
 import Post from "@/components/Post";
-import { Container } from "@mui/material";
+import RecentlySaved from "@/components/RecentlySaved";
+import RecommendedTopics from "@/components/RecommendedTopics";
+import StaffPicks from "@/components/StaffPicks";
+import WhoToFollow from "@/components/WhoToFollow";
+import { Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 export default function Home() {
@@ -19,33 +23,12 @@ export default function Home() {
         </Grid>
 
         <Grid item xs={4} className="p-10">
-          <div className="mb-20">
-            <p>Staff Picks</p>
-            some stuff
-          </div>
-          <div className="mb-20">
-            <p className="mb-6">Recommended topics</p>
-            <div className="flex gap-3 flex-wrap">
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Java</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">React</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Ruby</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Java</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Java</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">React</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Ruby</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Java</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Java</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">React</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Ruby</span>
-              <span className="rounded-full bg-[#F2F2F2] px-4 py-1">Java</span>
-            </div>
-          </div>
-          <div>
-            <p className="mb-6">Who to follow</p>
-          </div>
-          <div>
-            <p className="mb-6">Recently saved</p>
-          </div>
+          <Stack spacing={6}>
+            <StaffPicks />
+            <RecommendedTopics />
+            <WhoToFollow />
+            <RecentlySaved />
+          </Stack>
         </Grid>
       </Grid>
     </Container>
